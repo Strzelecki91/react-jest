@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { NotFoundPage } from "./components/NotFoundPage";
 import { HomePage } from "./components/HomePage";
 import { Nav } from "./components/Nav";
+import { AddPost } from "./components/AddPost";
 import { PostsList } from "./components/PostsList";
 import { LoginPage } from "./components/LoginPage";
 import { PostContextProvider } from "./components/context/AppContext";
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/posts" element={<PostsList />} />
+          <Route path="/posts/addPost" element={<AddPost />} />
           <Route path="/login" element={<LoginPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
