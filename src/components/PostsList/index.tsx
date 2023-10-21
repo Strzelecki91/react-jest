@@ -6,7 +6,7 @@ import { Post } from "../Post";
 import { PostContext } from "../context/AppContext";
 
 export const PostsList = () => {
-  const { postList, getPostList } = usePosts(PostContext);
+  const { postList, getPostList } = usePosts();
 
   useEffect(() => {
     getPostList();

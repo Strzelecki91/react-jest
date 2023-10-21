@@ -3,14 +3,14 @@ import { PostItemType } from "../AppContext";
 import { DeleteButton } from "../../DeleteButton";
 export type Data = {
   post: PostItemType;
-  newPost: PostItemType;
+  //   newPost: PostItemType;
   postList: PostItemType[];
   setPostList: React.Dispatch<React.SetStateAction<PostItemType[]>>;
-  setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
-  setNewPost: React.Dispatch<React.SetStateAction<PostItemType>>;
+  //   setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
+  //   setNewPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   getPostList: () => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
-  updatePost: (postId: number) => Promise<void>;
+  //   updatePost: (postId: number) => Promise<void>;
   handleSubmitNewPost: (
     event: FormEvent<HTMLFormElement>,
     id: number,
@@ -24,8 +24,14 @@ export const usePosts = (
   setList?: React.Dispatch<React.SetStateAction<PostItemType[]>>
 ): Data => {
   const [postList, setPostList] = useState<PostItemType[]>([]);
+  const [post, setPost] = useState<PostItemType>({
+    id: 0,
+    title: "",
+    body: "",
+    userId: 0,
+  });
 
-  //   const { id, title, body, userId } = post;
+  const { id, title, body, userId } = post;
   const url = "https://dummyjson.com/posts";
   const getPostList = async () => {
     try {
@@ -58,8 +64,6 @@ export const usePosts = (
     }
   };
 
-  //
-
   const deletePost = async (postId: number) => {
     if (postId <= 100) {
       try {
@@ -81,13 +85,13 @@ export const usePosts = (
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    setNewPost((prev) => ({ ...prev, [name]: value }));
+    // setNewPost((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>, postId: number) => {
     event.preventDefault();
 
-    updatePost(postId);
+    // updatePost(postId);
   };
 
   const handleSubmitNewPost = async (
@@ -106,14 +110,15 @@ export const usePosts = (
 
   return {
     post,
-    newPost,
+    // newPost,
     postList,
-    setPostList,
-    setPost,
-    setNewPost,
+
+    // setPost,
+    // setNewPost,
     getPostList,
     deletePost,
-    updatePost,
+    setPostList,
+    // updatePost,
     handleSubmitNewPost,
     handleSubmit,
     handleInput,
