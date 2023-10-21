@@ -3,12 +3,14 @@ import { usePosts } from "../context/Hooks/usePosts";
 import { Link } from "react-router-dom";
 import { DeleteButton } from "../DeleteButton";
 import { Post } from "../Post";
+import { PostContext } from "../context/AppContext";
 
 export const PostsList = () => {
-  const { postList, getPostList } = usePosts();
+  const { postList, getPostList } = usePosts(PostContext);
 
   useEffect(() => {
     getPostList();
+    console.log("Pobrano dane");
   }, []);
   return (
     <div>
@@ -17,7 +19,7 @@ export const PostsList = () => {
           return (
             <li key={post.id}>
               <Post />
-              {/* {post.id} {post.title} {post.body} {post.userId} */}
+              {post.id} {post.title} {post.body} {post.userId}
             </li>
           );
         })}
