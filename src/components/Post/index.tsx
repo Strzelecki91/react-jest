@@ -1,53 +1,65 @@
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
+
 import { usePosts } from "../context/Hooks/usePosts";
+import { PostContext, PostItemType } from "../context/AppContext";
+import { useParams } from "react-router-dom";
 
 export const Post = () => {
-  const {
-    post,
-    setPost,
-    newPost,
-    // setNewPost,
+  const { id } = useParams();
+  const { postList, deletePost, handleInput, handleSubmit } =
+    useContext(PostContext);
 
-    deletePost,
-    handleInput,
-    handleSubmit,
-  } = usePosts();
-  const { id, title, body, userId } = post;
-
-  // useEffect(() => {
-  //   setUserItem(user);
-  //   setNewUserItem(user);
-  // }, [setNewUserItem, setUserItem, user]);
+  const [post, setPost] = useState<PostItemType>({
+    id: 0,
+    title: "",
+    body: "",
+    userId: 0,
+  });
+  useEffect(() => {
+    if (id) {
+      const [currentPost] = postList.filter(
+        ({ id: postId }) => `${postId}` === id
+      );
+      if (currentPost) setPost(currentPost);
+    }
+  }, [id]);
+  console.log(post + "post");
 
   return (
     <>
       <p>
-        {id} - {title} {userId}
+        {id} - {post.title} {post.userId}
       </p>
-      <button onClick={() => deletePost(id)}>Delete</button>
-      <form onSubmit={(event) => handleSubmit(event, id)}>
-        <label htmlFor="title">
-          Tytuł:
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={newPost.title}
-            onChange={handleInput}
-          />
-        </label>
-        <label htmlFor="body">
-          Treść postu:
-          <input
-            type="text"
-            id="body"
-            name="body"
-            value={newPost.body}
-            onChange={handleInput}
-          />
-        </label>
-        <button type="submit">Update</button>
-      </form>
+      {id ? (
+        <div>
+          <button onClick={() => deletePost(parseInt(id))}>Delete</button>
+          <form onSubmit={(event) => handleSubmit(event, parseInt(id))}>
+            <label htmlFor="title">
+              Tytuł:
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={post.title}
+                onChange={handleInput}
+              />
+            </label>
+            <label htmlFor="body">
+              Treść postu:
+              <input
+                type="text"
+                id="body"
+                name="body"
+                value={post.body}
+                onChange={handleInput}
+              />
+            </label>
+            <button type="submit">Update</button>
+          </form>
+        </div>
+      ) : (
+        <span>brak id</span>
+      )}
     </>
   );
 };

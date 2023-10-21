@@ -9,14 +9,17 @@ export type PostItemType = {
 
 type PostContextType = {
   post: PostItemType;
+  newPost: PostItemType;
   postList: PostItemType[];
   setPostList: React.Dispatch<React.SetStateAction<PostItemType[]>>;
   setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
+  setNewPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   getPostList: () => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
   updatePost: (postId: number) => Promise<void>;
   handleSubmitNewPost: (
     event: FormEvent<HTMLFormElement>,
+    id: number,
     title: string,
     body: string
   ) => Promise<void>;
@@ -34,9 +37,11 @@ type Props = {
 export const PostContextProvider = ({ children }: Props) => {
   const {
     post,
+    newPost,
     postList,
     setPostList,
     setPost,
+    setNewPost,
     getPostList,
     deletePost,
     updatePost,
@@ -49,9 +54,11 @@ export const PostContextProvider = ({ children }: Props) => {
     <PostContext.Provider
       value={{
         post,
+        newPost,
         postList,
         setPostList,
         setPost,
+        setNewPost,
         getPostList,
         deletePost,
         updatePost,

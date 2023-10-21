@@ -9,6 +9,7 @@ import { AddPost } from "./components/AddPost";
 import { PostsList } from "./components/PostsList";
 import { LoginPage } from "./components/LoginPage";
 import { PostContextProvider } from "./components/context/AppContext";
+import { Post } from "./components/Post";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/posts" element={<PostsList />} />
           <Route path="/posts/addPost" element={<AddPost />} />
           <Route path="/login" element={<LoginPage />} />
-
+          <Route path="/posts/:id" element={<Post />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
