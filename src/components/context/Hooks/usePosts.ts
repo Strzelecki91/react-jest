@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { PostItemType } from "../AppContext";
 import { DeleteButton } from "../../DeleteButton";
 export type Data = {
@@ -35,11 +35,11 @@ export const usePosts = (
   const url = "https://dummyjson.com/posts";
   const getPostList = async () => {
     try {
-      const data = await fetch(`${url}?limit=10`);
+      const data = await fetch(`${url}`);
       if (!data.ok) throw new Error("Something goes wrong");
-      const posts = await data.json();
-      console.log(posts);
-      setPostList(posts.posts);
+      const { posts } = await data.json();
+      console.log(posts, " pobrana lista");
+      setPostList(posts);
     } catch (error) {
       console.log(error);
     }
@@ -107,6 +107,10 @@ export const usePosts = (
       setPostList((prev) => [...prev, newPost]);
     }
   };
+
+  useEffect(() => {
+    getPostList();
+  }, []);
 
   return {
     post,

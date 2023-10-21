@@ -8,10 +8,6 @@ import { PostContext } from "../context/AppContext";
 export const PostsList = () => {
   const { postList, getPostList } = usePosts();
 
-  useEffect(() => {
-    getPostList();
-    console.log("Pobrano dane");
-  }, []);
   return (
     <div>
       <ul>
@@ -20,10 +16,12 @@ export const PostsList = () => {
             <li key={post.id}>
               <Post />
               {post.id} {post.title} {post.body} {post.userId}
+              <Link to={`/posts/${post.id}`}>Post</Link>
             </li>
           );
         })}
       </ul>
+
       <Link to="/posts/addPost">Dodaj post</Link>
     </div>
   );

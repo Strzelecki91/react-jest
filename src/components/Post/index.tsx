@@ -16,14 +16,15 @@ export const Post = () => {
     userId: 0,
   });
   useEffect(() => {
+    console.log(id, postList, "ds");
     if (id) {
       const [currentPost] = postList.filter(
         ({ id: postId }) => `${postId}` === id
       );
       if (currentPost) setPost(currentPost);
+      console.log(postList + "post");
     }
   }, [id]);
-  console.log(post + "post");
 
   return (
     <>

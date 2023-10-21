@@ -23,6 +23,7 @@ function App() {
           <Route path="/posts/addPost" element={<AddPost />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/posts/:id" element={<Post />} />
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
