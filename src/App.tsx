@@ -6,19 +6,24 @@ import { NotFoundPage } from "./components/NotFoundPage";
 import { HomePage } from "./components/HomePage";
 import { Nav } from "./components/Nav";
 import { PostsList } from "./components/PostsList";
+import { LoginPage } from "./components/LoginPage";
+import { PostContextProvider } from "./components/context/AppContext";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Forum</h1>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/posts" element={<PostsList />} />
+    <PostContextProvider>
+      <div className="App">
+        <h1>Forum</h1>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/posts" element={<PostsList />} />
+          <Route path="/login" element={<LoginPage />} />
 
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </div>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
+    </PostContextProvider>
   );
 }
 
