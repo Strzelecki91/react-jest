@@ -12,6 +12,7 @@ export const Post = () => {
     postList,
     getSinglePost,
     deletePost,
+    getPostList,
     handleInput,
     handleSubmit,
   } = useContext(PostContext);
@@ -21,6 +22,7 @@ export const Post = () => {
     // console.log(id, postList, "ds");
     if (id) {
       getSinglePost(id);
+      // getPostList();
       //   const [currentPost] = postList.filter(
       //     ({ id: postId }) => `${postId}` === id
       //   );
