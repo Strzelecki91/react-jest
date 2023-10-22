@@ -6,30 +6,35 @@ import { useParams } from "react-router-dom";
 
 export const Post = () => {
   const { id } = useParams();
-  const { postList, deletePost, handleInput, handleSubmit } =
-    useContext(PostContext);
+  const {
+    post,
+    setPost,
+    postList,
+    getSinglePost,
+    deletePost,
+    handleInput,
+    handleSubmit,
+  } = useContext(PostContext);
 
-  const [post, setPost] = useState<PostItemType>({
-    id: 0,
-    title: "",
-    body: "",
-    userId: 0,
-  });
+  // const [post, setPost] = useState<PostItemType>();
   useEffect(() => {
-    console.log(id, postList, "ds");
+    // console.log(id, postList, "ds");
     if (id) {
-      const [currentPost] = postList.filter(
-        ({ id: postId }) => `${postId}` === id
-      );
-      if (currentPost) setPost(currentPost);
-      console.log(postList + "post");
+      getSinglePost(id);
+      //   const [currentPost] = postList.filter(
+      //     ({ id: postId }) => `${postId}` === id
+      //   );
+      //   if (currentPost) setPost(currentPost);
+      // console.log(id, title, "?");
     }
-  }, [id]);
 
+    // console.log(postList + "post");
+  }, []);
+  // console.log(id, title);
   return (
     <>
       <p>
-        {id} - {post.title} {post.userId}
+        {id} -{post.title} {post.userId}
       </p>
       {id ? (
         <div>

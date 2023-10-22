@@ -12,9 +12,10 @@ type PostContextType = {
   //   newPost: PostItemType;
   postList: PostItemType[];
   setPostList: React.Dispatch<React.SetStateAction<PostItemType[]>>;
-  //   setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
+  setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   //   setNewPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   getPostList: () => Promise<void>;
+  getSinglePost: (id: string) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
   //   updatePost: (postId: number) => Promise<void>;
   handleSubmitNewPost: (
@@ -40,9 +41,10 @@ export const PostContextProvider = ({ children }: Props) => {
     // newPost,
     postList,
     setPostList,
-    // setPost,
+    setPost,
     // setNewPost,
     getPostList,
+    getSinglePost,
     deletePost,
     // updatePost,
     handleSubmitNewPost,
@@ -57,9 +59,11 @@ export const PostContextProvider = ({ children }: Props) => {
         // newPost,
         postList,
         setPostList,
-        // setPost,
+        setPost,
         // setNewPost,
         getPostList,
+        getSinglePost,
+
         deletePost,
         // updatePost,
         handleSubmitNewPost,

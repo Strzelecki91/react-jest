@@ -14,8 +14,10 @@ export const PostsList = () => {
         {postList.map((post) => {
           return (
             <li key={post.id}>
-              <Post />
-              {post.id} {post.title} {post.body} {post.userId}
+              {/* <Post /> */}
+              {post.id}
+              {post.title}
+              {/* {post.body} {post.userId} */}
               <Link to={`/posts/${post.id}`}>Post</Link>
             </li>
           );

@@ -6,9 +6,10 @@ export type Data = {
   //   newPost: PostItemType;
   postList: PostItemType[];
   setPostList: React.Dispatch<React.SetStateAction<PostItemType[]>>;
-  //   setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
+  setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   //   setNewPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   getPostList: () => Promise<void>;
+  getSinglePost: (id: string) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
   //   updatePost: (postId: number) => Promise<void>;
   handleSubmitNewPost: (
@@ -44,6 +45,19 @@ export const usePosts = (
       console.log(error);
     }
   };
+
+  const getSinglePost = async (id: string) => {
+    try {
+      const response = await fetch(`${url}/${id}`);
+      if (!response.ok) throw new Error("Something goes wrong");
+      const data = await response.json();
+      console.log(data, " pobrany jeden");
+      setPost(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addNewPost = async (id: number, title: string, body: string) => {
     try {
       const response = await fetch("https://dummyjson.com/posts/add", {
@@ -117,11 +131,12 @@ export const usePosts = (
     // newPost,
     postList,
 
-    // setPost,
+    setPost,
     // setNewPost,
     getPostList,
     deletePost,
     setPostList,
+    getSinglePost,
     // updatePost,
     handleSubmitNewPost,
     handleSubmit,
