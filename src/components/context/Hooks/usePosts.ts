@@ -1,16 +1,21 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { PostItemType } from "../AppContext";
 import { DeleteButton } from "../../DeleteButton";
+
 export type Data = {
   post: PostItemType;
+  cartFav: PostItemType[];
   //   newPost: PostItemType;
   postList: PostItemType[];
+  postItem: PostItemType[];
   setPostList: React.Dispatch<React.SetStateAction<PostItemType[]>>;
   setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   //   setNewPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   getPostList: () => Promise<void>;
+  addToFav: (id: number) => void;
   getSinglePost: (id: string) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
+  isVisible: (id: number) => boolean;
   //   updatePost: (postId: number) => Promise<void>;
   handleSubmitNewPost: (
     event: FormEvent<HTMLFormElement>,
@@ -31,7 +36,8 @@ export const usePosts = (
     body: "",
     userId: 0,
   });
-
+  const [cartFav, setCartFav] = useState<PostItemType[]>([]);
+  const [postItem] = useState<PostItemType[]>([]);
   const { id, title, body, userId } = post;
   const url = "https://dummyjson.com/posts";
   const getPostList = async () => {
@@ -122,6 +128,17 @@ export const usePosts = (
     }
   };
 
+  const addToFav = (id: number) => {
+    const [postItem] = postList.filter((postItem) => postItem.id === id);
+    const isContainFavArray = cartFav.some(
+      (favElement) => favElement.id === postItem.id
+    );
+    if (!isContainFavArray) setCartFav((prev) => [...prev, postItem]);
+  };
+  const isVisible = (id: number) => {
+    const isInCartFav = cartFav.some((favElement) => favElement.id === id);
+    return isInCartFav;
+  };
   useEffect(() => {
     getPostList();
   }, []);
@@ -129,8 +146,11 @@ export const usePosts = (
   return {
     post,
     // newPost,
+    cartFav,
     postList,
-
+    postItem,
+    addToFav,
+    isVisible,
     setPost,
     // setNewPost,
     getPostList,

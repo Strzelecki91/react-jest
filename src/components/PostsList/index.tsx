@@ -1,34 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { usePosts } from "../context/Hooks/usePosts";
 import { Link, useParams } from "react-router-dom";
 import { DeleteButton } from "../DeleteButton";
 
 import { Post } from "../Post";
 import { PostContext } from "../context/AppContext";
-export type CartFavType = {
-  id: number;
-  title: string;
-  body: string;
-};
-type PostFavItemProps = {
-  postItem: CartFavType;
-};
+import { Favourites } from "../Favourites";
+
 export const PostsList = () => {
   // const { id } = useParams();
-  const [cartFav, setCartFav] = useState<CartFavType[]>([]);
-  const { post, postList, getSinglePost, getPostList } = usePosts();
-  console.log(post);
-  const isVisible = (id: number) => {
-    const isInCartFav = cartFav.some((favElement) => favElement.id === id);
-    return isInCartFav;
-  };
-  const addToFav = (id: number) => {
-    const [postItem] = postList.filter((postItem) => postItem.id === id);
-    const isContainFavArray = cartFav.some(
-      (favElement) => favElement.id === postItem.id
-    );
-    if (!isContainFavArray) setCartFav((prev) => [...prev, postItem]);
-  };
+  const { cartFav, addToFav, isVisible, postList } = useContext(PostContext);
+
   return (
     <div>
       <ul>
@@ -43,9 +25,7 @@ export const PostsList = () => {
               {post.userId} */}
               <button
                 onClick={() => addToFav(post.id)}
-                disabled={cartFav.some(
-                  (favElement) => favElement.id === post.id
-                )}
+                disabled={isVisible(post.id)}
               >
                 Dodaj do ulubinych
               </button>
@@ -54,7 +34,7 @@ export const PostsList = () => {
           );
         })}
       </ul>
-
+      <Favourites />
       <Link to="/posts/addPost">Dodaj post</Link>
     </div>
   );

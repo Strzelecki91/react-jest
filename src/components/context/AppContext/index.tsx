@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { usePosts } from "../Hooks/usePosts";
+
 export type PostItemType = {
   id: number;
   title: string;
@@ -11,10 +12,15 @@ type PostContextType = {
   post: PostItemType;
   //   newPost: PostItemType;
   postList: PostItemType[];
+  cartFav: PostItemType[];
+  postItem: PostItemType[];
   setPostList: React.Dispatch<React.SetStateAction<PostItemType[]>>;
   setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   //   setNewPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   getPostList: () => Promise<void>;
+  addToFav: (id: number) => void;
+  isVisible: (id: number) => boolean;
+
   getSinglePost: (id: string) => Promise<void>;
   deletePost: (postId: number) => Promise<void>;
   //   updatePost: (postId: number) => Promise<void>;
@@ -38,10 +44,14 @@ type Props = {
 export const PostContextProvider = ({ children }: Props) => {
   const {
     post,
+    cartFav,
     // newPost,
     postList,
+    postItem,
     setPostList,
     setPost,
+    addToFav,
+    isVisible,
     // setNewPost,
     getPostList,
     getSinglePost,
@@ -56,10 +66,14 @@ export const PostContextProvider = ({ children }: Props) => {
     <PostContext.Provider
       value={{
         post,
+        cartFav,
         // newPost,
         postList,
+        postItem,
         setPostList,
         setPost,
+        addToFav,
+        isVisible,
         // setNewPost,
         getPostList,
         getSinglePost,

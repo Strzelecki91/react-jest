@@ -9,6 +9,7 @@ export const Nav = () => {
           <NavLink to="/posts">Posty</NavLink>
           <NavLink to="/posts/addPost">Dodaj post</NavLink>
           <NavLink to="/login">Logowanie</NavLink>
+          <NavLink to="/posts/fav">Ulubione</NavLink>
         </li>
       </ul>
     </nav>
