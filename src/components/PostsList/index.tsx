@@ -11,6 +11,7 @@ export const PostsList = () => {
   // const { id } = useParams();
   const { cartFav, addToFav, isVisible, postList } = useContext(PostContext);
 
+  const addLike = () => {};
   return (
     <div>
       <ul>
@@ -28,6 +29,9 @@ export const PostsList = () => {
                 disabled={isVisible(post.id)}
               >
                 Dodaj do ulubinych
+              </button>
+              <button onClick={() => addLike()} disabled={isVisible(post.id)}>
+                Polub
               </button>
               <Link to={`/posts/${post.id}`}>Post</Link>
             </li>
