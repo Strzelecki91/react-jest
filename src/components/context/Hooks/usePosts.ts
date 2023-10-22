@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { PostItemType } from "../AppContext";
-import { DeleteButton } from "../../DeleteButton";
 
 export type Data = {
   post: PostItemType;
@@ -21,13 +20,13 @@ export type Data = {
     event: FormEvent<HTMLFormElement>,
     id: number,
     title: string,
-    body: string
+    body: string,
   ) => Promise<void>;
   handleSubmit: (event: FormEvent<HTMLFormElement>, postId: number) => void;
   handleInput: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 export const usePosts = (
-  setList?: React.Dispatch<React.SetStateAction<PostItemType[]>>
+  setList?: React.Dispatch<React.SetStateAction<PostItemType[]>>,
 ): Data => {
   const [postList, setPostList] = useState<PostItemType[]>([]);
   const [post, setPost] = useState<PostItemType>({
@@ -99,7 +98,6 @@ export const usePosts = (
       }
     }
     setList?.((prev) => prev.filter(({ id }) => id !== postId));
-    console.log(postList);
   };
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -118,7 +116,7 @@ export const usePosts = (
     event: FormEvent<HTMLFormElement>,
     id: number,
     title: string,
-    body: string
+    body: string,
   ) => {
     event.preventDefault();
 
@@ -131,7 +129,7 @@ export const usePosts = (
   const addToFav = (id: number) => {
     const [postItem] = postList.filter((postItem) => postItem.id === id);
     const isContainFavArray = cartFav.some(
-      (favElement) => favElement.id === postItem.id
+      (favElement) => favElement.id === postItem.id,
     );
     if (!isContainFavArray) setCartFav((prev) => [...prev, postItem]);
   };

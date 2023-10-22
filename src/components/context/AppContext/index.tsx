@@ -28,14 +28,14 @@ type PostContextType = {
     event: FormEvent<HTMLFormElement>,
     id: number,
     title: string,
-    body: string
+    body: string,
   ) => Promise<void>;
   handleSubmit: (event: FormEvent<HTMLFormElement>, postId: number) => void;
   handleInput: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const PostContext = React.createContext<PostContextType>(
-  {} as PostContextType
+  {} as PostContextType,
 );
 
 type Props = {
