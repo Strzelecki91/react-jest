@@ -31,7 +31,17 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {},
+    "parserOptions": {
+      "ecmaFeatures": {
+        "arrowFunctions": true,
+        "classes": true,
+        "destructuring": true,
+        "globalReturn": true,
+        "spread": true
+      }
+    }
   },
   "browserslist": {
     "production": [

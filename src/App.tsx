@@ -11,6 +11,7 @@ import { LoginPage } from "./components/LoginPage";
 import { PostContextProvider } from "./components/context/AppContext";
 import { Post } from "./components/Post";
 import { Favourites } from "./components/Favourites";
+import { doubleValue } from "./components/Helpers/doubleValue";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/posts/:id" element={<Post />} />
           <Route path="/posts/fav" element={<Favourites />} />
           <Route path="*" element={<NotFoundPage />} />
+          {/* <Route path="/double" element={<doubleValue />} /> */}
         </Routes>
       </div>
     </PostContextProvider>

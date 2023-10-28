@@ -14,7 +14,11 @@
     "ecmaVersion": "latest",
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "arrowFunctions": true,
+      "classes": true,
+      "defaultParams": true,
+      "destructuring": true
     },
     "project": "./tsconfig.json"
   },
@@ -27,5 +31,9 @@
         "endOfLine": "auto"
       }
     ]
-  }
+  },
+  "noInlineConfig": true,
+  "reportUnusedDisableDirectives": true,
+  "globals": {},
+  "ignorePatterns": []
 }

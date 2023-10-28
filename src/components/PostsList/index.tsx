@@ -19,21 +19,40 @@ export const PostsList = () => {
           return (
             <li key={post.id}>
               {/* <Post /> */}
+              <form className="form_box">
+                <label>
+                  <input type="text" defaultValue={post.title} />
+                </label>{" "}
+                <label>
+                  <textarea
+                    name=""
+                    id=""
+                    cols={80}
+                    rows={10}
+                    defaultValue={post.body}
+                  ></textarea>
+                </label>
+                <div>
+                  <button
+                    onClick={() => addToFav(post.id)}
+                    disabled={isVisible(post.id)}
+                  >
+                    Dodaj do ulubinych
+                  </button>
+                  <button
+                    onClick={() => addLike()}
+                    disabled={isVisible(post.id)}
+                  >
+                    Polub
+                  </button>
+                  <Link to={`/posts/${post.id}`}>Post</Link>
+                </div>
+              </form>
               {post.id}
-              {post.title}
+              {/* {post.title} */}
               {/* {post.body}
 
               {post.userId} */}
-              <button
-                onClick={() => addToFav(post.id)}
-                disabled={isVisible(post.id)}
-              >
-                Dodaj do ulubinych
-              </button>
-              <button onClick={() => addLike()} disabled={isVisible(post.id)}>
-                Polub
-              </button>
-              <Link to={`/posts/${post.id}`}>Post</Link>
             </li>
           );
         })}

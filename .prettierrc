@@ -4,5 +4,8 @@
   "semi": true,
   "singleQuote": false,
   "trailingComa": "all",
-  "printWidth": 80
+  "printWidth": 80,
+  "brackerLine": true,
+  "arrowParens": "always",
+  "cursorOffset": -1
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-
+import "../Post/post.scss";
 import { usePosts } from "../context/Hooks/usePosts";
 import { PostContext, PostItemType } from "../context/AppContext";
 import { useParams } from "react-router-dom";
@@ -40,8 +40,10 @@ export const Post = () => {
       </p>
       {id ? (
         <div>
-          <button onClick={() => deletePost(parseInt(id))}>Delete</button>
-          <form onSubmit={(event) => handleSubmit(event, parseInt(id))}>
+          <form
+            className="form_box"
+            onSubmit={(event) => handleSubmit(event, parseInt(id))}
+          >
             <label htmlFor="title">
               Tytuł:
               <input
@@ -54,16 +56,17 @@ export const Post = () => {
             </label>
             <label htmlFor="body">
               Treść postu:
-              <input
-                type="text"
-                id="body"
+              <textarea
                 name="body"
-                value={post.body}
-                onChange={handleInput}
-              />
+                id="body"
+                defaultValue={post.body}
+                cols={80}
+                rows={10}
+              ></textarea>
             </label>
-            <button type="submit">Update</button>
           </form>
+          <button type="submit">Update</button>
+          <button onClick={() => deletePost(parseInt(id))}>Delete</button>
         </div>
       ) : (
         <span>brak id</span>

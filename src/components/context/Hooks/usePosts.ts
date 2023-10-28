@@ -82,7 +82,13 @@ export const usePosts = (
       console.log(error);
     }
   };
-
+  const updatePost = async () => {
+    try {
+      const response = await fetch(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const deletePost = async (postId: number) => {
     if (postId <= 100) {
       try {
