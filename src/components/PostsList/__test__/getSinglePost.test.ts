@@ -9,4 +9,11 @@ describe("function", () => {
 
     expect(post).toBe(expectedItems);
   });
+  it("check function getPostList", async () => {
+    const { result } = renderHook(usePosts);
+    // const { getPostList } = usePosts();
+    const listLength = await result.current.getPostList();
+    const value = 30;
+    expect(listLength).toBe(value);
+  });
 });

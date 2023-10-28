@@ -41,9 +41,9 @@ export const usePosts = (): Data => {
       const data = await fetch(`${url}`);
       if (!data.ok) throw new Error("Something goes wrong");
       const { posts } = await data.json();
-      console.log(posts, " pobrana lista");
+      // console.log(posts, " pobrana lista");
       setPostList(posts);
-      return posts;
+      return posts.length;
     } catch (error) {
       console.log(error);
     }
