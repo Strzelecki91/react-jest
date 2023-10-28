@@ -37,7 +37,7 @@ export const PostsList = () => {
                     onClick={() => addToFav(post.id)}
                     disabled={isVisible(post.id)}
                   >
-                    Dodaj do ulubinych
+                    Dodaj do ulubionych
                   </button>
                   <button
                     onClick={() => addLike()}

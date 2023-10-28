@@ -13,7 +13,7 @@ type PostContextType = {
   //   newPost: PostItemType;
   postList: PostItemType[];
   cartFav: PostItemType[];
-  postItem: PostItemType[];
+
   setPostList: React.Dispatch<React.SetStateAction<PostItemType[]>>;
   setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   //   setNewPost: React.Dispatch<React.SetStateAction<PostItemType>>;
@@ -47,7 +47,7 @@ export const PostContextProvider = ({ children }: Props) => {
     cartFav,
     // newPost,
     postList,
-    postItem,
+
     setPostList,
     setPost,
     addToFav,
@@ -69,7 +69,7 @@ export const PostContextProvider = ({ children }: Props) => {
         cartFav,
         // newPost,
         postList,
-        postItem,
+
         setPostList,
         setPost,
         addToFav,

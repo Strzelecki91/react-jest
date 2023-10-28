@@ -6,7 +6,7 @@ export type Data = {
   cartFav: PostItemType[];
   //   newPost: PostItemType;
   postList: PostItemType[];
-  postItem: PostItemType[];
+
   setPostList: React.Dispatch<React.SetStateAction<PostItemType[]>>;
   setPost: React.Dispatch<React.SetStateAction<PostItemType>>;
   //   setNewPost: React.Dispatch<React.SetStateAction<PostItemType>>;
@@ -25,9 +25,7 @@ export type Data = {
   handleSubmit: (event: FormEvent<HTMLFormElement>, postId: number) => void;
   handleInput: (event: ChangeEvent<HTMLInputElement>) => void;
 };
-export const usePosts = (
-  setList?: React.Dispatch<React.SetStateAction<PostItemType[]>>,
-): Data => {
+export const usePosts = (): Data => {
   const [postList, setPostList] = useState<PostItemType[]>([]);
   const [post, setPost] = useState<PostItemType>({
     id: 0,
@@ -36,8 +34,7 @@ export const usePosts = (
     userId: 0,
   });
   const [cartFav, setCartFav] = useState<PostItemType[]>([]);
-  const [postItem] = useState<PostItemType[]>([]);
-  const { id, title, body, userId } = post;
+
   const url = "https://dummyjson.com/posts";
   const getPostList = async () => {
     try {
@@ -46,6 +43,7 @@ export const usePosts = (
       const { posts } = await data.json();
       console.log(posts, " pobrana lista");
       setPostList(posts);
+      return posts;
     } catch (error) {
       console.log(error);
     }
@@ -56,8 +54,9 @@ export const usePosts = (
       const response = await fetch(`${url}/${id}`);
       if (!response.ok) throw new Error("Something goes wrong");
       const data = await response.json();
-      console.log(data, " pobrany jeden");
+      // console.log(data, " pobrany jeden");
       setPost(data);
+      return data.title;
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +102,7 @@ export const usePosts = (
         console.log(error);
       }
     }
-    setList?.((prev) => prev.filter(({ id }) => id !== postId));
+    setPostList((prev) => prev.filter(({ id }) => id !== postId));
   };
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -152,7 +151,7 @@ export const usePosts = (
     // newPost,
     cartFav,
     postList,
-    postItem,
+
     addToFav,
     isVisible,
     setPost,
